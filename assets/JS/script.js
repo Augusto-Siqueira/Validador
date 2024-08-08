@@ -32,12 +32,21 @@ let B7Validator = {
                 switch(rDetails[0]) {
                     case 'required':
                         if(input.value == '') {
-                            return 'Campo obrigatório,';
+                            return 'Campo obrigatório!';
                         }
                     break;
-                    case 'min:':
-
+                    case 'min':
+                        if(input.value.length < rDetails[1]) {
+                            return 'Necessário no mínimos '+rDetails[1]+' caracteres!';
+                        }
                     break;
+                    case 'email':
+                        if(input.value != '') {
+                            let regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                            if(!regex.test(input.value.toLowerCase())) {
+                                return 'Email inválido!';
+                            }
+                        }
                 }
             }
         }
